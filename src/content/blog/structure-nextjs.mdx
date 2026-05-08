@@ -1,0 +1,31 @@
+---
+title: 'Cómo estructuré mi primer proyecto en Next.js'
+publishedAt: '2023-10-24'
+summary: 'Guía paso a paso sobre las decisiones de arquitectura y estructura de carpetas para un proyecto escalable.'
+---
+
+Cuando empecé con Next.js, me sentí abrumado por la libertad que ofrece. A diferencia de otros frameworks opinionados, Next.js te deja decidir mucho.
+
+Aquí te cuento cómo organizo mis proyectos ahora para mantener el orden.
+
+## 1. Src directory
+
+Lo primero que hago es mover todo a una carpeta `src`. Esto separa mi código fuente de los archivos de configuración en la raíz.
+
+\`\`\`bash
+mkdir src
+mv app src/
+\`\`\`
+
+## 2. Feature-based Architecture
+
+En lugar de agrupar todo por tipo (todos los componentes en una carpeta, todos los hooks en otra), trato de agrupar por "feature" cuando el proyecto crece. Pero para empezar, esta estructura funciona bien:
+
+- \`src/components/ui\`: Componentes base (botones, inputs)
+- \`src/components/layout\`: Navbar, Footer
+- \`src/lib\`: Utilidades y configuraciones
+- \`src/app\`: Páginas y rutas
+
+## Conclusión
+
+Mantener una estructura simple al principio es clave. No sobreingenierices hasta que no sientas el dolor de la desorganización.
