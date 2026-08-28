@@ -4,17 +4,17 @@ import { Section } from '@/components/common/Section';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata = constructMetadata({
-    title: 'Contact | Didier Portfolio',
-    description: 'Get in touch with me for freelance work or job opportunities.',
+    title: 'Contacto | Didier Huerta',
+    description: 'Contáctame para trabajo freelance o oportunidades laborales.',
 });
 
 export default function ContactPage() {
     return (
         <Section>
             <div className="max-w-2xl mx-auto text-center mb-12">
-                <Heading as="h1">Contact</Heading>
+                <Heading as="h1">Contacto</Heading>
                 <p className="text-xl text-muted-foreground">
-                    I'm currently available for freelance work and full-time positions.
+                    Actualmente estoy disponible para trabajo freelance y posiciones a tiempo completo.
                 </p>
             </div>
             <ContactForm />

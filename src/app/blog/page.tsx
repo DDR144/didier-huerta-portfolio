@@ -7,8 +7,8 @@ import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/ca
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata = constructMetadata({
-    title: 'Blog | Didier Portfolio',
-    description: 'Thoughts on software development, performance, and best practices.',
+    title: 'Blog | Didier Huerta',
+    description: 'Reflexiones sobre desarrollo de software, rendimiento y mejores prácticas.',
 });
 
 export default async function BlogPage() {
@@ -19,7 +19,7 @@ export default async function BlogPage() {
             <div className="max-w-4xl mx-auto mb-12">
                 <Heading as="h1">Blog</Heading>
                 <p className="text-xl text-muted-foreground">
-                    Writing about what I learn in web development.
+                    Escribiendo sobre lo que aprendo en desarrollo web.
                 </p>
             </div>
 
@@ -31,7 +31,7 @@ export default async function BlogPage() {
                                 <div className="flex items-center justify-between mb-2">
                                     <CardTitle className="text-xl">{post.meta.title}</CardTitle>
                                     <time className="text-sm text-muted-foreground tabular-nums">
-                                        {format(parseISO(post.meta.publishedAt), 'MMMM dd, yyyy')}
+                                        {format(parseISO(post.meta.publishedAt), "dd 'de' MMMM, yyyy")}
                                     </time>
                                 </div>
                                 <CardDescription className="text-base">
@@ -42,7 +42,7 @@ export default async function BlogPage() {
                     </Link>
                 ))}
                 {posts.length === 0 && (
-                    <p className="text-muted-foreground">No posts found.</p>
+                    <p className="text-muted-foreground">No se encontraron artículos.</p>
                 )}
             </div>
         </Section>

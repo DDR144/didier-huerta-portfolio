@@ -21,36 +21,38 @@ const stack = [
   'TypeScript',
   'Tailwind CSS',
   'Shadcn/UI',
-  'Zustand',
   'Framer Motion',
   'Node.js',
   'PostgreSQL',
+  'Prisma',
+  'Drizzle ORM',
+  'Astro',
 ];
 
 const featuredProjects = [
   {
-    title: 'E-Commerce Dashboard',
+    title: 'DevBlog',
     description:
-      'A comprehensive dashboard for managing products, orders, and analytics. Built with Next.js App Router and Server Actions.',
-    tech: ['Next.js', 'TypeScript', 'Prisma', 'Stripe'],
-    link: '/projects/ecommerce',
-    repo: 'https://github.com/your-username/ecommerce',
+      'Plataforma de blog técnico para desarrolladores con panel de administración, renderizado de Markdown y SEO optimizado.',
+    tech: ['Next.js', 'Prisma', 'PostgreSQL', 'shadcn/ui', 'MDX'],
+    link: 'https://github.com/DDR144/devblog',
+    repo: 'https://github.com/DDR144/devblog',
   },
   {
-    title: 'SaaS Landing Page',
+    title: 'Joyas Dido',
     description:
-      'High-performance landing page with stunning animations and SEO optimization.',
-    tech: ['React', 'Tailwind', 'Framer Motion'],
-    link: '/projects/saas-landing',
-    repo: 'https://github.com/your-username/saas',
+      'Landing page para joyería artesanal. Sitio estático con Astro, cero JavaScript del lado del cliente y diseño responsive.',
+    tech: ['Astro', 'TypeScript', 'CSS Vanilla'],
+    link: 'https://github.com/DDR144/joyas-dido',
+    repo: 'https://github.com/DDR144/joyas-dido',
   },
   {
     title: 'Task Management App',
     description:
-      'Real-time task collaboration tool with drag-and-drop support.',
-    tech: ['React', 'Zustand', 'dnd-kit', 'Supabase'],
-    link: '/projects/task-manager',
-    repo: 'https://github.com/your-username/task-manager',
+      'App Kanban con autenticación, drag-and-drop, prioridades y fechas límite. Full-stack con Server Actions.',
+    tech: ['Next.js', 'Better Auth', 'Drizzle ORM', 'PostgreSQL'],
+    link: 'https://github.com/DDR144/task-management-app',
+    repo: 'https://github.com/DDR144/task-management-app',
   },
 ];
 
@@ -66,20 +68,21 @@ export default function Home() {
           className="max-w-3xl"
         >
           <Badge variant="secondary" className="mb-4">
-            Frontend Engineer available for work
+            Desarrollador Full Stack — disponible para trabajar
           </Badge>
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl mb-6">
-            Building
-            <span className="text-primary block">modern web experiences.</span>
+            Construyendo
+            <span className="text-primary block">experiencias web modernas.</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl leading-relaxed">
-            I craft accessible, pixel-perfect, and performant web applications.
-            Focused on React ecosystems to deliver exceptional user interfaces.
+            Creo aplicaciones web accesibles, performantes y pixel-perfect.
+            Enfocado en los ecosistemas de React y Next.js para entregar
+            interfaces de usuario excepcionales.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button asChild size="lg" className="h-12 px-8 text-base">
               <Link href="/projects">
-                View Projects <ArrowRight className="ml-2 h-4 w-4" />
+                Ver Proyectos <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button
@@ -88,7 +91,7 @@ export default function Home() {
               size="lg"
               className="h-12 px-8 text-base"
             >
-              <Link href="/contact">Contact Me</Link>
+              <Link href="/contact">Contáctame</Link>
             </Button>
           </div>
         </motion.div>
@@ -97,9 +100,9 @@ export default function Home() {
       {/* Stack Section */}
       <Section className="bg-muted/50">
         <div className="text-center mb-12">
-          <Heading as="h2">Technical Stack</Heading>
+          <Heading as="h2">Stack Técnico</Heading>
           <p className="text-muted-foreground">
-            Technologies I use to build robust applications.
+            Tecnologías que utilizo para construir aplicaciones robustas.
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
@@ -126,12 +129,12 @@ export default function Home() {
       <Section>
         <div className="flex items-center justify-between mb-12">
           <div>
-            <Heading as="h2">Featured Projects</Heading>
-            <p className="text-muted-foreground">Some of my recent work.</p>
+            <Heading as="h2">Proyectos Destacados</Heading>
+            <p className="text-muted-foreground">Algunos de mis trabajos recientes.</p>
           </div>
           <Button variant="ghost" asChild className="hidden md:inline-flex">
             <Link href="/projects">
-              View all projects <ArrowRight className="ml-2 h-4 w-4" />
+              Ver todos los proyectos <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
@@ -171,7 +174,7 @@ export default function Home() {
                 <CardFooter className="pt-0">
                   <div className="flex w-full gap-2">
                     <Button asChild size="sm" className="w-full">
-                      <Link href={project.link}>Details</Link>
+                      <Link href={project.link}>Detalles</Link>
                     </Button>
                     <Button
                       asChild
@@ -180,7 +183,7 @@ export default function Home() {
                       className="w-full"
                     >
                       <Link href={project.repo} target="_blank">
-                        Code
+                        Código
                       </Link>
                     </Button>
                   </div>
@@ -191,7 +194,7 @@ export default function Home() {
         </div>
         <div className="mt-8 text-center md:hidden">
           <Button variant="outline" asChild>
-            <Link href="/projects">View all projects</Link>
+            <Link href="/projects">Ver todos los proyectos</Link>
           </Button>
         </div>
       </Section>
@@ -203,30 +206,30 @@ export default function Home() {
             <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
               <Zap className="h-5 w-5 text-primary" />
             </div>
-            <h3 className="font-bold text-lg">Performance First</h3>
+            <h3 className="font-bold text-lg">Rendimiento Primero</h3>
             <p className="text-muted-foreground text-sm">
-              Optimized for Core Web Vitals. Fast load times and smooth
-              interactions are non-negotiable.
+              Optimizado para Core Web Vitals. Tiempos de carga rápidos e
+              interacciones fluidas son innegociables.
             </p>
           </div>
           <div className="flex flex-col gap-2">
             <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
               <Layers className="h-5 w-5 text-primary" />
             </div>
-            <h3 className="font-bold text-lg">Clean Architecture</h3>
+            <h3 className="font-bold text-lg">Arquitectura Limpia</h3>
             <p className="text-muted-foreground text-sm">
-              Scalable codebases with clear separation of concerns. Easy to
-              maintain and extend.
+              Bases de código escalables con separación clara de responsabilidades.
+              Fácil de mantener y extender.
             </p>
           </div>
           <div className="flex flex-col gap-2">
             <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
               <Code2 className="h-5 w-5 text-primary" />
             </div>
-            <h3 className="font-bold text-lg">Modern Stack</h3>
+            <h3 className="font-bold text-lg">Stack Moderno</h3>
             <p className="text-muted-foreground text-sm">
-              Leveraging the latest features of Next.js, React, and TypeScript
-              for robust solutions.
+              Aprovechando las últimas funcionalidades de Next.js, React y TypeScript
+              para soluciones robustas.
             </p>
           </div>
         </div>

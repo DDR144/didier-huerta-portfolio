@@ -9,10 +9,10 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'Projects', href: '/projects' },
+  { name: 'Inicio', href: '/' },
+  { name: 'Proyectos', href: '/projects' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Contacto', href: '/contact' },
 ];
 
 export function Navbar() {
@@ -28,7 +28,7 @@ export function Navbar() {
             className="flex items-center gap-2 font-bold text-lg tracking-tight hover:opacity-80 transition-opacity"
           >
             <Terminal className="h-6 w-6" />
-            <span>DevPortfolio</span>
+            <span>Didier Huerta</span>
           </Link>
         </div>
 
@@ -61,7 +61,7 @@ export function Navbar() {
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
+                <span className="sr-only">Alternar menú</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[240px] sm:w-[300px]">
@@ -72,7 +72,7 @@ export function Navbar() {
                   onClick={() => setIsOpen(false)}
                 >
                   <Terminal className="h-5 w-5" />
-                  <span>DevPortfolio</span>
+                  <span>Didier Huerta</span>
                 </Link>
                 <nav className="flex flex-col gap-4">
                   {navItems.map((item) => (
@@ -92,7 +92,7 @@ export function Navbar() {
                   ))}
                   <Button asChild size="sm" className="w-full mt-2">
                     <Link
-                      href="https://github.com/your-username"
+                      href="https://github.com/DDR144"
                       target="_blank"
                       onClick={() => setIsOpen(false)}
                     >

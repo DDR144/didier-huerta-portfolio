@@ -4,46 +4,37 @@ import { Section } from '@/components/common/Section';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata = constructMetadata({
-    title: 'Projects | Didier Portfolio',
-    description: 'Showcase of my frontend engineering projects.',
+    title: 'Proyectos | Didier Huerta',
+    description: 'Proyectos de ingeniería frontend — rendimiento, accesibilidad y patrones de UI modernos.',
 });
 
 const projects = [
     {
-        title: "E-Commerce Dashboard",
-        description: "A comprehensive dashboard for managing products and analytics.",
-        problem: "Clients needed a centralized way to manage their inventory and view sales data without technical knowledge.",
-        solution: "Built a user-friendly admin panel using Next.js App Router for speed, server actions for secure mutations, and Stripe for payments.",
-        tech: ["Next.js", "TypeScript", "Prisma", "Stripe", "Recharts"],
-        link: "/projects/ecommerce",
-        repo: "https://github.com/your-username/ecommerce",
+        title: 'DevBlog',
+        description: 'Plataforma de blog técnico para desarrolladores con panel de administración.',
+        problem: 'Necesitaba un espacio propio para publicar artículos técnicos con control total sobre el contenido, SEO y diseño.',
+        solution: 'Construí una plataforma completa con Next.js App Router, Prisma como ORM, PostgreSQL, y un panel admin protegido con JWT para gestionar posts, categorías y tags.',
+        tech: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL', 'shadcn/ui', 'MDX'],
+        link: 'https://github.com/DDR144/devblog',
+        repo: 'https://github.com/DDR144/devblog',
     },
     {
-        title: "SaaS Landing Page",
-        description: "High-performance landing page with stunning animations.",
-        problem: "The product needed a marketing site that converted visitors but also loaded instantly to improve SEO scores.",
-        solution: "Implemented a static site using Next.js with Framer Motion for scroll-triggered animations that don't impact Core Web Vitals.",
-        tech: ["React", "Tailwind", "Framer Motion"],
-        link: "/projects/saas-landing",
-        repo: "https://github.com/your-username/saas",
+        title: 'Joyas Dido',
+        description: 'Landing page para joyería artesanal con Astro y cero JavaScript del lado del cliente.',
+        problem: 'Un joyero artesanal necesitaba presencia digital para mostrar su trabajo y recibir encargos personalizados por WhatsApp.',
+        solution: 'Diseñé un sitio estático con Astro 7, CSS vanilla y tipografía serif para transmitir elegancia. Cero JS del lado del cliente garantiza carga instantánea y SEO perfecto.',
+        tech: ['Astro', 'TypeScript', 'CSS Vanilla', 'Puppeteer'],
+        link: 'https://github.com/DDR144/joyas-dido',
+        repo: 'https://github.com/DDR144/joyas-dido',
     },
     {
-        title: "Task Management App",
-        description: "Real-time task collaboration tool.",
-        problem: "Remote teams struggle with keeping task lists synchronized in real-time.",
-        solution: "Leveraged Supabase Realtime subscriptions to update UI state instantly across all connected clients using optimistic updates.",
-        tech: ["React", "Zustand", "dnd-kit", "Supabase"],
-        link: "/projects/task-manager",
-        repo: "https://github.com/your-username/task-manager",
-    },
-    {
-        title: "Weather Dashboard",
-        description: "Weather forecast application with location detection.",
-        problem: "Existing weather apps were cluttered with ads and slow to load.",
-        solution: "Created a minimal, fast PWA that caches weather data locally and uses server-side rendering for initial paint.",
-        tech: ["Next.js", "OpenWeatherMap API", "PWA"],
-        link: "/projects/weather",
-        repo: "https://github.com/your-username/weather",
+        title: 'Task Management App',
+        description: 'App Kanban full-stack con autenticación, drag-and-drop y gestión de tareas.',
+        problem: 'Necesitaba una herramienta simple pero completa para gestionar tareas personales con autenticación segura e interfaz interactiva.',
+        solution: 'Implementé un tablero Kanban con Next.js 16, Better Auth para sesiones, Drizzle ORM para la base de datos, y Server Actions para mutaciones con control de concurrencia.',
+        tech: ['Next.js', 'Better Auth', 'Drizzle ORM', 'PostgreSQL', 'shadcn/ui'],
+        link: 'https://github.com/DDR144/task-management-app',
+        repo: 'https://github.com/DDR144/task-management-app',
     },
 ];
 
@@ -51,9 +42,9 @@ export default function ProjectsPage() {
     return (
         <Section>
             <div className="max-w-4xl mx-auto mb-12">
-                <Heading as="h1">Projects</Heading>
+                <Heading as="h1">Proyectos</Heading>
                 <p className="text-xl text-muted-foreground">
-                    A collection of projects exploring performance, accessibility, and modern UI patterns.
+                    Proyectos reales explorando rendimiento, accesibilidad y patrones de arquitectura modernos.
                 </p>
             </div>
 

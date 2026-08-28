@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
 
 export function constructMetadata({
-  title = 'Didier Portfolio | Frontend Engineer',
-  description = 'Frontend Engineer specializing in Next.js, React, and tailored web experiences.',
+  title = 'Didier Huerta | Desarrollador Full Stack',
+  description =
+    'Desarrollador Full Stack especializado en Next.js, React y experiencias web modernas. Explora mis proyectos y contáctame.',
   image = '/og-image.jpg',
   icons = '/favicon.ico',
   noIndex = false,
@@ -25,15 +26,8 @@ export function constructMetadata({
         },
       ],
     },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [image],
-      creator: '@didier',
-    },
     icons,
-    metadataBase: new URL('https://didier-portfolio.com'), // Replace with actual URL
+    metadataBase: new URL('https://didier-portfolio.com'),
     ...(noIndex && {
       robots: {
         index: false,

@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
 import { contactFormSchema, ContactFormValues } from '@/lib/schemas';
+import { sendContactEmail } from '@/app/contact/actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -14,6 +15,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 export function ContactForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const form = useForm<ContactFormValues>({
         resolver: zodResolver(contactFormSchema),
@@ -26,26 +28,32 @@ export function ContactForm() {
 
     async function onSubmit(data: ContactFormValues) {
         setIsSubmitting(true);
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        console.log(data);
+        setError(null);
+
+        const result = await sendContactEmail(data);
+
         setIsSubmitting(false);
-        setIsSuccess(true);
-        form.reset();
+
+        if (result.success) {
+            setIsSuccess(true);
+            form.reset();
+        } else {
+            setError(result.error ?? 'Error al enviar el mensaje. Intenta de nuevo.');
+        }
     }
 
     if (isSuccess) {
         return (
             <Card className="w-full max-w-md mx-auto">
                 <CardHeader>
-                    <CardTitle>Message Sent!</CardTitle>
+                    <CardTitle>¡Mensaje Enviado!</CardTitle>
                     <CardDescription>
-                        Thanks for reaching out. I&apos;ll get back to you as soon as possible.
+                        Gracias por contactarme. Te responderé lo antes posible.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <Button onClick={() => setIsSuccess(false)} className="w-full">
-                        Send another message
+                        Enviar otro mensaje
                     </Button>
                 </CardContent>
             </Card>
@@ -55,22 +63,25 @@ export function ContactForm() {
     return (
         <Card className="w-full max-w-md mx-auto">
             <CardHeader>
-                <CardTitle>Get in touch</CardTitle>
+                <CardTitle>Ponte en contacto</CardTitle>
                 <CardDescription>
-                    Have a project in mind or just want to say hi? Fill out the form below.
+                    ¿Tienes un proyecto en mente o simplemente quieres saludar? Completa el formulario a continuación.
                 </CardDescription>
             </CardHeader>
             <CardContent>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                        {error && (
+                            <p className="text-sm text-destructive bg-destructive/10 p-3 rounded-md">{error}</p>
+                        )}
                         <FormField
                             control={form.control}
                             name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Name</FormLabel>
+                                    <FormLabel>Nombre</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="John Doe" {...field} />
+                                        <Input placeholder="Juan Pérez" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -81,9 +92,9 @@ export function ContactForm() {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel>Correo electrónico</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="john@example.com" {...field} />
+                                        <Input placeholder="juan@ejemplo.com" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -94,10 +105,10 @@ export function ContactForm() {
                             name="message"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Message</FormLabel>
+                                    <FormLabel>Mensaje</FormLabel>
                                     <FormControl>
                                         <Textarea
-                                            placeholder="Tell me about your project..."
+                                            placeholder="Cuéntame sobre tu proyecto..."
                                             className="resize-none min-h-[120px]"
                                             {...field}
                                         />
@@ -110,10 +121,10 @@ export function ContactForm() {
                             {isSubmitting ? (
                                 <>
                                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                    Sending...
+                                    Enviando...
                                 </>
                             ) : (
-                                'Send Message'
+                                'Enviar Mensaje'
                             )}
                         </Button>
                     </form>

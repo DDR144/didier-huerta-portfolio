@@ -41,11 +41,11 @@ export function ProjectCard({ title, description, problem, solution, tech, link,
                 </CardHeader>
                 <CardContent className="flex-1 space-y-4">
                     <div>
-                        <h4 className="font-semibold text-sm mb-1">Problem:</h4>
+                        <h4 className="font-semibold text-sm mb-1">Problema:</h4>
                         <p className="text-sm text-muted-foreground">{problem}</p>
                     </div>
                     <div>
-                        <h4 className="font-semibold text-sm mb-1">Solution:</h4>
+                        <h4 className="font-semibold text-sm mb-1">Solución:</h4>
                         <p className="text-sm text-muted-foreground">{solution}</p>
                     </div>
                     <div className="flex flex-wrap gap-2 pt-2">
@@ -59,12 +59,12 @@ export function ProjectCard({ title, description, problem, solution, tech, link,
                 <CardFooter className="gap-2">
                     {link && (
                         <Button asChild size="sm" className="w-full">
-                            <Link href={link}>Live Demo</Link>
+                            <Link href={link}>Demo en Vivo</Link>
                         </Button>
                     )}
                     {repo && (
                         <Button asChild size="sm" variant="outline" className="w-full">
-                            <Link href={repo} target="_blank">Code</Link>
+                            <Link href={repo} target="_blank">Código</Link>
                         </Button>
                     )}
                 </CardFooter>
