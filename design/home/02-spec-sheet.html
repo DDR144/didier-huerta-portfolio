@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home — dirección ficha técnica</title>
+<style>
+  :root {
+    --background: #09090b;
+    --foreground: #fafafa;
+    --card: #09090b;
+    --primary: #fafafa;
+    --primary-foreground: #18181b;
+    --secondary: #27272a;
+    --muted: #27272a;
+    --muted-foreground: #a1a1aa;
+    --accent: #27272a;
+    --border: #27272a;
+    --input: #27272a;
+    --ring: #d4d4d8;
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--background); color: var(--foreground); }
+  body { font-family: var(--font-sans); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, p, dl, dd, dt, ul { margin: 0; }
+  ul { padding: 0; list-style: none; }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+
+  .mono { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted-foreground); }
+  .grid-frame { max-width: 1240px; margin: 0 auto; border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+
+  /* Top bar */
+  .topbar { display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 24px; border-bottom: 1px solid var(--border); }
+  .topbar .crumbs { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--muted-foreground); }
+  .topbar .crumbs b { color: var(--foreground); font-weight: 600; }
+  .topbar nav { display: flex; gap: 24px; font-size: 13px; font-weight: 500; }
+  .topbar nav a { color: var(--muted-foreground); }
+  .topbar nav a[aria-current="page"] { color: var(--foreground); }
+  .topbar nav a:hover { color: var(--foreground); }
+
+  /* Cover */
+  .cover { display: grid; grid-template-columns: 1.35fr 1fr; border-bottom: 1px solid var(--border); }
+  .cover-main { padding: 56px 40px 48px; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; gap: 48px; }
+  .cover-main h1 { font-size: 68px; line-height: 0.96; letter-spacing: -0.045em; font-weight: 800; }
+  .cover-main h1 span { display: block; color: var(--muted-foreground); }
+  .status { display: inline-flex; align-items: center; gap: 10px; height: 32px; padding: 0 12px; border: 1px solid var(--border); border-radius: 4px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--foreground); width: fit-content; }
+  .status .pulse { width: 6px; height: 6px; border-radius: 9999px; background: var(--foreground); }
+
+  .cover-meta { padding: 0; display: flex; flex-direction: column; }
+  .meta-row { display: grid; grid-template-columns: 132px 1fr; gap: 16px; padding: 18px 24px; border-bottom: 1px solid var(--border); align-items: center; flex: 1; }
+  .meta-row:last-child { border-bottom: 0; }
+  .meta-row dt { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted-foreground); }
+  .meta-row dd { font-size: 15px; font-weight: 500; }
+  .meta-row dd small { display: block; font-size: 13px; font-weight: 400; color: var(--muted-foreground); margin-top: 4px; }
+
+  /* Metrics */
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); }
+  .metric { padding: 28px 24px; border-right: 1px solid var(--border); }
+  .metric:last-child { border-right: 0; }
+  .metric .num { font-size: 44px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+  .metric .lbl { margin-top: 10px; }
+
+  /* Section common */
+  .block { border-bottom: 1px solid var(--border); }
+  .block-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 22px 24px; border-bottom: 1px solid var(--border); }
+  .block-head h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .block-head p { font-size: 13px; color: var(--muted-foreground); margin-top: 4px; }
+
+  /* Stack matrix */
+  .matrix { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .matrix .cell { padding: 20px 24px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
+  .matrix .cell:nth-child(4n) { border-right: 0; }
+  .matrix .cell:nth-last-child(-n + 3) { border-bottom: 0; }
+  .matrix .cell .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted-foreground); }
+  .matrix .cell .v { font-size: 16px; font-weight: 600; margin-top: 6px; letter-spacing: -0.01em; }
+
+  /* Projects table */
+  .table-head, .row { display: grid; grid-template-columns: 56px 1.05fr 1.5fr 1.15fr 88px; align-items: start; }
+  .table-head { border-bottom: 1px solid var(--border); padding: 0; }
+  .table-head span { padding: 12px 16px; border-right: 1px solid var(--border); }
+  .table-head span:last-child { border-right: 0; }
+  .row { border-bottom: 1px solid var(--border); transition: background-color 120ms ease; }
+  .row:last-child { border-bottom: 0; }
+  .row > * { padding: 20px 16px; border-right: 1px solid var(--border); }
+  .row > *:last-child { border-right: 0; }
+  .row:hover { background: color-mix(in srgb, var(--accent) 45%, transparent); }
+  .row .id { font-family: var(--font-mono); font-size: 12px; color: var(--muted-foreground); }
+  .row h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; }
+  .row .role { font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .row p { font-size: 14px; color: var(--muted-foreground); line-height: 1.55; }
+  .row .stack-list { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted-foreground); }
+  .row .open { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--foreground); }
+
+  /* Principles */
+  .principles { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .principle { padding: 24px; border-right: 1px solid var(--border); }
+  .principle:last-child { border-right: 0; }
+  .principle h3 { font-size: 16px; font-weight: 600; margin: 10px 0 8px; letter-spacing: -0.01em; }
+  .principle p { font-size: 13px; line-height: 1.6; color: var(--muted-foreground); }
+
+  /* CTA */
+  .cta { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 32px 24px; }
+  .cta h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; }
+  .cta p { font-size: 14px; color: var(--muted-foreground); margin-top: 6px; }
+  .actions { display: flex; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 4px; font-size: 13px; font-weight: 600; border: 1px solid var(--input); background: transparent; color: var(--foreground); }
+  .btn:hover { background: var(--accent); }
+  .btn-solid { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
+  .btn-solid:hover { background: color-mix(in srgb, var(--primary) 88%, transparent); }
+
+  .footer { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; }
+  .footer .social { display: flex; gap: 20px; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted-foreground); }
+  .footer a:hover { color: var(--foreground); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="grid-frame">
+  <div class="topbar">
+    <span class="crumbs">didier-huerta <span aria-hidden="true">/</span> <b>inicio</b> <span aria-hidden="true">/</span> v2026.1</span>
+    <nav aria-label="Navegación principal">
+      <a href="#" aria-current="page">Inicio</a>
+      <a href="#">Proyectos</a>
+      <a href="#">Blog</a>
+      <a href="#">Contacto</a>
+    </nav>
+  </div>
+
+  <section class="cover" aria-labelledby="cover-title">
+    <div class="cover-main">
+      <div>
+        <span class="status"><span class="pulse" aria-hidden="true"></span> Disponible para trabajar</span>
+        <h1 id="cover-title" style="margin-top:28px;">Construyendo <span>experiencias web modernas.</span></h1>
+      </div>
+      <p style="font-size:16px;line-height:1.6;color:var(--muted-foreground);max-width:52ch;">Desarrollador Full Stack. Aplicaciones web accesibles, performantes y pixel-perfect sobre React y Next.js.</p>
+    </div>
+    <dl class="cover-meta">
+      <div class="meta-row"><dt>Rol</dt><dd>Desarrollador Full Stack</dd></div>
+      <div class="meta-row"><dt>Enfoque</dt><dd>Rendimiento, accesibilidad, arquitectura<small>Core Web Vitals y componentes reutilizables</small></dd></div>
+      <div class="meta-row"><dt>Stack principal</dt><dd>Next.js · React · TypeScript<small>Tailwind CSS, Shadcn/UI, PostgreSQL</small></dd></div>
+      <div class="meta-row"><dt>Estado</dt><dd>Abierto a oportunidades</dd></div>
+    </dl>
+  </section>
+
+  <section class="metrics" aria-label="Resumen">
+    <div class="metric"><div class="num">11</div><span class="mono lbl">tecnologías en uso</span></div>
+    <div class="metric"><div class="num">3</div><span class="mono lbl">proyectos destacados</span></div>
+    <div class="metric"><div class="num">2</div><span class="mono lbl">capas: frontend y datos</span></div>
+  </section>
+
+  <section class="block" aria-labelledby="stack-title">
+    <div class="block-head">
+      <div>
+        <h2 id="stack-title">Stack técnico</h2>
+        <p>Tecnologías que utilizo para construir aplicaciones robustas.</p>
+      </div>
+      <span class="mono">01 / herramientas</span>
+    </div>
+    <div class="matrix">
+      <div class="cell"><div class="k">01 framework</div><div class="v">Next.js</div></div>
+      <div class="cell"><div class="k">02 librería</div><div class="v">React</div></div>
+      <div class="cell"><div class="k">03 lenguaje</div><div class="v">TypeScript</div></div>
+      <div class="cell"><div class="k">04 estilos</div><div class="v">Tailwind CSS</div></div>
+      <div class="cell"><div class="k">05 componentes</div><div class="v">Shadcn/UI</div></div>
+      <div class="cell"><div class="k">06 animación</div><div class="v">Framer Motion</div></div>
+      <div class="cell"><div class="k">07 runtime</div><div class="v">Node.js</div></div>
+      <div class="cell"><div class="k">08 base de datos</div><div class="v">PostgreSQL</div></div>
+      <div class="cell"><div class="k">09 orm</div><div class="v">Prisma</div></div>
+      <div class="cell"><div class="k">10 orm</div><div class="v">Drizzle ORM</div></div>
+      <div class="cell"><div class="k">11 sitios estáticos</div><div class="v">Astro</div></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="projects-title">
+    <div class="block-head">
+      <div>
+        <h2 id="projects-title">Proyectos destacados</h2>
+        <p>Algunos de mis trabajos recientes.</p>
+      </div>
+      <span class="mono">02 / 3 registros</span>
+    </div>
+    <div class="table-head mono" aria-hidden="true">
+      <span>ID</span><span>Proyecto</span><span>Problema</span><span>Stack</span><span>Acción</span>
+    </div>
+    <article class="row">
+      <span class="id">01</span>
+      <div>
+        <h3>DevBlog</h3>
+        <div class="role">Plataforma de contenido</div>
+      </div>
+      <p>Espacio propio para publicar artículos técnicos con control total sobre contenido, SEO y diseño.</p>
+      <div class="stack-list"><span>Next.js</span><span>Prisma</span><span>PostgreSQL</span><span>MDX</span></div>
+      <span class="open">Abrir →</span>
+    </article>
+    <article class="row">
+      <span class="id">02</span>
+      <div>
+        <h3>Joyas Dido</h3>
+        <div class="role">Landing estática</div>
+      </div>
+      <p>Presencia digital para joyería artesanal: mostrar el trabajo y recibir encargos por WhatsApp.</p>
+      <div class="stack-list"><span>Astro</span><span>TypeScript</span><span>CSS Vanilla</span></div>
+      <span class="open">Abrir →</span>
+    </article>
+    <article class="row">
+      <span class="id">03</span>
+      <div>
+        <h3>Task Management App</h3>
+        <div class="role">Aplicación full-stack</div>
+      </div>
+      <p>Gestión de tareas personales con autenticación segura, drag-and-drop y control de concurrencia.</p>
+      <div class="stack-list"><span>Next.js</span><span>Better Auth</span><span>Drizzle ORM</span></div>
+      <span class="open">Abrir →</span>
+    </article>
+  </section>
+
+  <section class="block" aria-labelledby="principles-title">
+    <div class="block-head">
+      <div><h2 id="principles-title">Cómo trabajo</h2></div>
+      <span class="mono">03 / principios</span>
+    </div>
+    <div class="principles">
+      <div class="principle">
+        <span class="mono">01</span>
+        <h3>Rendimiento primero</h3>
+        <p>Optimizado para Core Web Vitals. Tiempos de carga rápidos e interacciones fluidas son innegociables.</p>
+      </div>
+      <div class="principle">
+        <span class="mono">02</span>
+        <h3>Arquitectura limpia</h3>
+        <p>Bases de código escalables con separación clara de responsabilidades. Fácil de mantener y extender.</p>
+      </div>
+      <div class="principle">
+        <span class="mono">03</span>
+        <h3>Stack moderno</h3>
+        <p>Aprovecho las últimas funcionalidades de Next.js, React y TypeScript para soluciones robustas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-title">
+    <div>
+      <h2 id="cta-title">Hablemos de tu próximo proyecto</h2>
+      <p>Respondo en menos de 48 horas.</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn-solid" href="#">Contáctame →</a>
+      <a class="btn" href="#">Ver proyectos</a>
+    </div>
+  </section>
+
+  <footer class="footer" style="border-top:1px solid var(--border)">
+    <span class="mono">Construido con Next.js, Tailwind y Shadcn/UI · © 2026 Didier Huerta</span>
+    <div class="social"><a href="#">GitHub</a><a href="#">LinkedIn</a><a href="#">Correo</a></div>
+  </footer>
+</div>
+</body>
+</html>

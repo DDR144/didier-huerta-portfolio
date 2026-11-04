@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proyectos — Índice de casos</title>
+<style>
+  :root {
+    --background: #ffffff;
+    --foreground: #09090b;
+    --card: #ffffff;
+    --popover: #ffffff;
+    --primary: #18181b;
+    --primary-foreground: #fafafa;
+    --secondary: #f4f4f5;
+    --muted: #f4f4f5;
+    --muted-foreground: #71717a;
+    --accent: #f4f4f5;
+    --accent-foreground: #18181b;
+    --border: #e4e4e7;
+    --input: #e4e4e7;
+    --ring: #09090b;
+    --radius: 0.5rem;
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    background: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, p, ul, ol { margin: 0; }
+  ul, ol { padding: 0; list-style: none; }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--background);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .brand svg { width: 20px; height: 20px; }
+  .navlinks {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .navlinks a { color: var(--muted-foreground); }
+  .navlinks a:hover, .navlinks a[aria-current="page"] { color: var(--foreground); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--foreground);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .btn-sm { height: 36px; padding: 0 12px; font-size: 13px; }
+  .btn-solid { background: var(--primary); color: var(--primary-foreground); }
+  .btn-solid:hover { opacity: 0.92; }
+  .btn-outline { border-color: var(--input); background: var(--background); }
+  .btn-outline:hover { background: var(--accent); }
+
+  main { padding: 48px 0 64px; }
+  .page-head { margin-bottom: 8px; }
+  .page-head h1 {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-top: 12px;
+  }
+  .page-head p {
+    font-size: 17px;
+    color: var(--muted-foreground);
+    margin-top: 10px;
+    max-width: 68ch;
+  }
+
+  .index-table { margin-top: 32px; }
+  .index-header {
+    display: grid;
+    grid-template-columns: 44px 1.6fr 1.6fr 1.4fr 1fr 110px;
+    gap: 20px;
+    align-items: end;
+    padding: 0 0 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .index-header span { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-foreground); }
+
+  .case-row {
+    display: grid;
+    grid-template-columns: 44px 1.6fr 1.6fr 1.4fr 1fr 110px;
+    gap: 20px;
+    align-items: start;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .case-row .idx { font-family: var(--font-mono); font-size: 12px; color: var(--muted-foreground); padding-top: 3px; }
+  .case-title h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+  .case-title .meta { font-size: 12px; color: var(--muted-foreground); margin-top: 4px; }
+  .case-cell p { font-size: 14px; line-height: 1.55; color: var(--foreground); }
+  .case-cell.outcome p { font-weight: 500; }
+  .stack-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stack-list li {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    padding: 3px 9px;
+    color: var(--muted-foreground);
+  }
+  .case-actions { display: flex; justify-content: flex-end; }
+
+  .dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  .dialog {
+    width: 100%;
+    max-width: 720px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    background: var(--popover);
+    color: var(--popover-foreground);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .dialog-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 24px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .dialog-title h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.03em; }
+  .dialog-title .hash {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--muted-foreground);
+    margin-top: 6px;
+  }
+  .dialog-close {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--background);
+    cursor: pointer;
+  }
+  .dialog-close svg { width: 14px; height: 14px; }
+  .dialog-close:hover { background: var(--accent); }
+  .dialog-body { padding: 22px 24px; }
+  .dialog-section { margin-bottom: 20px; }
+  .dialog-section h4 {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    margin-bottom: 6px;
+  }
+  .dialog-section p { font-size: 15px; line-height: 1.65; color: var(--foreground); }
+  .dialog-section.outcome p { font-weight: 500; }
+  .dialog-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .dialog-tags li {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    padding: 4px 10px;
+    color: var(--muted-foreground);
+  }
+  .dialog-footer {
+    display: flex;
+    gap: 10px;
+    padding: 16px 24px 22px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+  .state-toggle {
+    position: fixed; right: 20px; bottom: 20px; z-index: 30;
+    display: inline-flex; align-items: center; gap: 8px; height: 36px;
+    padding: 0 14px; border-radius: 6px; border: 1px solid var(--input);
+    background: var(--background); color: var(--foreground);
+    font-family: var(--font-sans); font-size: 13px; font-weight: 500;
+    cursor: pointer; box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+  .state-toggle:hover { background: var(--accent); }
+  .state-toggle:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .state-toggle .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted-foreground); }
+</style>
+</head>
+<body>
+<header class="navbar">
+  <a class="brand" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 14 15 20 7"/><line x1="14" y1="7" x2="20" y2="7"/><line x1="20" y1="7" x2="20" y2="13"/></svg>
+    Didier Huerta
+  </a>
+  <nav class="navlinks" aria-label="Navegación principal">
+    <a href="#">Inicio</a>
+    <a href="#">Experiencia</a>
+    <a href="#" aria-current="page">Proyectos</a>
+    <a href="#">Cómo trabajo</a>
+    <a href="#">Blog</a>
+    <a href="#">Contacto</a>
+  </nav>
+</header>
+
+<main id="main" aria-hidden="true">
+  <div class="container">
+    <div class="page-head">
+      <span class="mono">Proyectos</span>
+      <h1>Índice de casos</h1>
+      <p>Tres proyectos reales con el problema, la solución, el resultado y el stack. Haz clic en una fila para abrir el caso completo.</p>
+    </div>
+
+    <section class="index-table" aria-label="Listado de proyectos">
+      <div class="index-header" aria-hidden="true">
+        <span></span>
+        <span>Caso</span>
+        <span>Problema</span>
+        <span>Resultado</span>
+        <span>Stack</span>
+        <span></span>
+      </div>
+
+      <article class="case-row">
+        <span class="idx">01</span>
+        <div class="case-title">
+          <h3>DevBlog</h3>
+          <p class="meta">2025 · Full Stack Developer</p>
+        </div>
+        <div class="case-cell"><p>Necesitaba un espacio propio para publicar artículos técnicos con control total sobre el contenido, SEO y diseño.</p></div>
+        <div class="case-cell outcome"><p>Artículos en Markdown con SEO por ruta y un panel donde el contenido se gestiona sin tocar código.</p></div>
+        <ul class="stack-list" aria-label="Tecnologías">
+          <li>Next.js</li><li>TypeScript</li><li>Prisma</li><li>PostgreSQL</li><li>shadcn/ui</li><li>MDX</li>
+        </ul>
+        <div class="case-actions"><button class="btn btn-outline btn-sm" aria-label="Abrir caso DevBlog">Ver caso</button></div>
+      </article>
+
+      <article class="case-row">
+        <span class="idx">02</span>
+        <div class="case-title">
+          <h3>Joyas Dido</h3>
+          <p class="meta">2024 · Frontend Developer</p>
+        </div>
+        <div class="case-cell"><p>Un joyero artesanal necesitaba presencia digital para mostrar su trabajo y recibir encargos personalizados por WhatsApp.</p></div>
+        <div class="case-cell outcome"><p>Carga instantánea y SEO completo, con un flujo de encargo que termina en WhatsApp sin formularios intermedios.</p></div>
+        <ul class="stack-list" aria-label="Tecnologías">
+          <li>Astro</li><li>TypeScript</li><li>CSS Vanilla</li><li>Puppeteer</li>
+        </ul>
+        <div class="case-actions"><button class="btn btn-outline btn-sm" aria-label="Abrir caso Joyas Dido">Ver caso</button></div>
+      </article>
+
+      <article class="case-row">
+        <span class="idx">03</span>
+        <div class="case-title">
+          <h3>Task Management App</h3>
+          <p class="meta">2026 · Full Stack Developer</p>
+        </div>
+        <div class="case-cell"><p>Necesitaba una herramienta simple pero completa para gestionar tareas personales con autenticación segura e interfaz interactiva.</p></div>
+        <div class="case-cell outcome"><p>Tareas con prioridades y fechas límite, movidas por drag-and-drop y sin escrituras concurrentes que se pisen.</p></div>
+        <ul class="stack-list" aria-label="Tecnologías">
+          <li>Next.js</li><li>Better Auth</li><li>Drizzle ORM</li><li>PostgreSQL</li><li>shadcn/ui</li>
+        </ul>
+        <div class="case-actions"><button class="btn btn-outline btn-sm" aria-label="Abrir caso Task Management App">Ver caso</button></div>
+      </article>
+    </section>
+  </div>
+</main>
+
+<div class="dialog-backdrop" role="presentation">
+  <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" aria-describedby="dialog-desc">
+    <header class="dialog-header">
+      <div class="dialog-title">
+        <h2 id="dialog-title">DevBlog</h2>
+        <p class="hash" id="dialog-desc"><span aria-hidden="true">#</span>devblog · 2025 · Full Stack Developer</p>
+      </div>
+      <button class="dialog-close" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </header>
+    <div class="dialog-body">
+      <div class="dialog-section">
+        <h4>Problema</h4>
+        <p>Necesitaba un espacio propio para publicar artículos técnicos con control total sobre el contenido, SEO y diseño.</p>
+      </div>
+      <div class="dialog-section">
+        <h4>Solución</h4>
+        <p>Construí una plataforma completa con Next.js App Router, Prisma como ORM, PostgreSQL, y un panel admin protegido con JWT para gestionar posts, categorías y tags.</p>
+      </div>
+      <div class="dialog-section outcome">
+        <h4>Resultado</h4>
+        <p>Artículos en Markdown con SEO por ruta y un panel donde el contenido se gestiona sin tocar código.</p>
+      </div>
+      <div class="dialog-section">
+        <h4>Tecnologías</h4>
+        <ul class="dialog-tags" aria-label="Tecnologías">
+          <li>Next.js</li><li>TypeScript</li><li>Prisma</li><li>PostgreSQL</li><li>shadcn/ui</li><li>MDX</li>
+        </ul>
+      </div>
+    </div>
+    <footer class="dialog-footer">
+      <a class="btn btn-solid" href="https://github.com/DDR144/devblog" target="_blank" rel="noopener noreferrer">Ver proyecto</a>
+      <a class="btn btn-outline" href="https://github.com/DDR144/devblog" target="_blank" rel="noopener noreferrer">Código</a>
+      <button class="btn btn-outline">Cerrar</button>
+    </footer>
+  </section>
+</div>
+
+<button class="state-toggle" id="state-toggle" type="button" aria-controls="project-detail">
+  <span class="k">Estado</span> <span id="state-toggle-label">Ver detalle #devblog</span>
+</button>
+<script>
+  (function () {
+    var toggle = document.getElementById('state-toggle');
+    var label = document.getElementById('state-toggle-label');
+    var backdrop = document.querySelector('.dialog-backdrop');
+    var dialog = backdrop ? backdrop.querySelector('[role="dialog"]') : null;
+    if (!backdrop || !toggle) return;
+    if (!backdrop.id) backdrop.id = 'project-detail';
+    toggle.setAttribute('aria-expanded', 'false');
+    function setOpen(open) {
+      backdrop.style.display = open ? '' : 'none';
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      label.textContent = open ? 'Cerrar detalle' : 'Ver detalle #devblog';
+      var main = document.getElementById('main');
+      if (main) main.setAttribute('aria-hidden', open ? 'true' : 'false');
+      if (open && dialog) dialog.focus();
+    }
+    setOpen(false);
+    toggle.addEventListener('click', function () {
+      setOpen(backdrop.style.display === 'none');
+    });
+    if (dialog) dialog.setAttribute('tabindex', '-1');
+    backdrop.addEventListener('click', function (event) {
+      if (event.target === backdrop) setOpen(false);
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  })();
+</script>
+</body>
+</html>

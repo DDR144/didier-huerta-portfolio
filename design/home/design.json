@@ -1,0 +1,34 @@
+{
+  "title": "Home del portafolio",
+  "brief": "Home de didier-huerta-portfolio con un objetivo de contratación: que un reclutador entienda en segundos quién es, qué construyó y cómo trabaja, sobre los tokens existentes (paleta zinc de shadcn, Inter, bordes de 1px).",
+  "artboards": [
+    {
+      "file": "01-editorial.html",
+      "title": "Editorial con reglas",
+      "tradeoff": "Máxima identidad tipográfica y jerarquía por reglas de 1px; exige buen copy y es menos escaneable para quien hojea rápido.",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "02-spec-sheet.html",
+      "title": "Ficha técnica",
+      "tradeoff": "Densa y muy reconocible para audiencia técnica (matriz, tabla de proyectos, etiquetas mono); más fría y con menos impacto emocional para reclutadores no técnicos.",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "03-focus.html",
+      "title": "Foco central y tarjetas",
+      "tradeoff": "La más legible y segura, con hero centrado y tarjetas con maqueta de ventana; la menos distintiva de las tres.",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "04-recruiter.html",
+      "title": "Orientada a reclutadores",
+      "tradeoff": "Pone el trabajo y el proceso al frente (problema → solución → resultado, cuatro pasos de trabajo, criterios de código) y cierra con una banda oscura de contacto; es más larga y pide contenido real escrito con cuidado, porque no hay capturas ni testimonios.",
+      "width": 1440,
+      "height": 1000
+    }
+  ]
+}

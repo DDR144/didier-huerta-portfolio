@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home — dirección reclutadores</title>
+<style>
+  :root {
+    --background: #ffffff;
+    --foreground: #09090b;
+    --card: #ffffff;
+    --primary: #18181b;
+    --primary-foreground: #fafafa;
+    --secondary: #f4f4f5;
+    --secondary-foreground: #18181b;
+    --muted: #f4f4f5;
+    --muted-foreground: #71717a;
+    --accent: #f4f4f5;
+    --accent-foreground: #18181b;
+    --border: #e4e4e7;
+    --input: #e4e4e7;
+    --ring: #09090b;
+    --ink: #09090b;
+    --ink-foreground: #fafafa;
+    --ink-muted: #a1a1aa;
+    --ink-border: #27272a;
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--background); color: var(--foreground); }
+  body { font-family: var(--font-sans); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, p, ul, ol { margin: 0; }
+  ul, ol { padding: 0; list-style: none; }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .mono { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted-foreground); }
+
+  /* Navbar */
+  .navbar { position: sticky; top: 0; z-index: 5; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; border-bottom: 1px solid var(--border); background: color-mix(in srgb, var(--background) 92%, transparent); backdrop-filter: blur(8px); }
+  .brand { display: flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+  .brand svg { width: 20px; height: 20px; }
+  .navlinks { display: flex; align-items: center; gap: 26px; font-size: 14px; font-weight: 500; }
+  .navlinks a { color: color-mix(in srgb, var(--foreground) 60%, transparent); }
+  .navlinks a:hover, .navlinks a[aria-current="page"] { color: var(--foreground); }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 6px; font-size: 14px; font-weight: 500; border: 1px solid transparent; background: transparent; color: var(--foreground); white-space: nowrap; }
+  .btn-sm { height: 34px; padding: 0 13px; font-size: 13px; }
+  .btn-lg { height: 48px; padding: 0 26px; font-size: 15px; }
+  .btn-solid { background: var(--primary); color: var(--primary-foreground); }
+  .btn-solid:hover { background: color-mix(in srgb, var(--primary) 90%, transparent); }
+  .btn-outline { border-color: var(--input); background: var(--background); }
+  .btn-outline:hover { background: var(--accent); }
+  .btn-ghost { border-color: var(--border); }
+  .btn-ghost:hover { background: var(--accent); }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1.5fr 1fr; gap: 64px; padding: 72px 0 64px; align-items: start; }
+  .hero-copy h1 { font-size: 58px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 800; max-width: 20ch; }
+  .hero-copy h1 span { color: var(--muted-foreground); }
+  .hero-copy p.lead { font-size: 18px; line-height: 1.6; color: var(--muted-foreground); max-width: 54ch; margin-top: 22px; }
+  .hero-actions { display: flex; gap: 10px; margin-top: 28px; }
+  .facts { display: flex; gap: 28px; margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--border); }
+  .fact .n { font-size: 26px; font-weight: 700; letter-spacing: -0.03em; }
+  .fact .l { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-foreground); margin-top: 6px; }
+
+  .card-aside { border: 1px solid var(--border); border-radius: 10px; padding: 24px; background: var(--card); box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); }
+  .status { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
+  .status .pulse { width: 8px; height: 8px; border-radius: 9999px; background: var(--foreground); box-shadow: 0 0 0 4px var(--secondary); }
+  .card-aside p.note { font-size: 14px; line-height: 1.6; color: var(--muted-foreground); margin-top: 12px; }
+  .contact-list { margin-top: 20px; display: flex; flex-direction: column; border-top: 1px solid var(--border); }
+  .contact-list a { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 500; }
+  .contact-list a .v { margin-right: auto; }
+  .contact-list a .k { width: 76px; flex: none; }
+  .contact-list a .arrow { color: var(--muted-foreground); }
+  .contact-list a:hover { color: var(--muted-foreground); }
+  .contact-list .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-foreground); }
+
+  /* Section scaffolding */
+  .section { padding: 72px 0; border-top: 1px solid var(--border); }
+  .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 12px; }
+  .section-head h2 { font-size: 34px; font-weight: 750; letter-spacing: -0.035em; }
+  .section-head p { font-size: 15px; color: var(--muted-foreground); margin-top: 8px; max-width: 60ch; }
+
+  /* Project rows: the centerpiece */
+  .tag { display: inline-flex; align-items: center; border: 1px solid var(--border); border-radius: 9999px; padding: 3px 10px; font-size: 11px; font-weight: 600; color: var(--muted-foreground); }
+
+  /* Process */
+  .process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--border); margin-top: 28px; }
+  .step { padding: 26px 24px 26px 0; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .step:last-child { border-right: 0; padding-right: 0; }
+  .step:not(:first-child) { padding-left: 24px; }
+  .step .num { font-family: var(--font-mono); font-size: 12px; color: var(--muted-foreground); }
+  .step h3 { font-size: 17px; font-weight: 650; letter-spacing: -0.01em; margin: 12px 0 8px; }
+  .step p { font-size: 14px; line-height: 1.62; color: var(--muted-foreground); }
+
+  /* Criteria panel */
+  .split { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; margin-top: 64px; padding-top: 56px; border-top: 1px solid var(--border); }
+  .criteria { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .criteria li { display: flex; gap: 12px; align-items: flex-start; padding: 14px 18px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .criteria li:last-child { border-bottom: 0; }
+  .criteria li svg { width: 16px; height: 16px; flex: none; margin-top: 3px; }
+  .criteria li b { font-weight: 600; }
+
+  /* Stack */
+  .case-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .case-card { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); padding: 20px; box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); transition: border-color 120ms ease, box-shadow 120ms ease; }
+  .case-card:hover { border-color: var(--muted-foreground); box-shadow: 0 2px 6px 0 rgb(0 0 0 / 0.08); }
+  .case-meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted-foreground); }
+  .case-title { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; }
+  .case-desc { font-size: 13px; line-height: 1.55; color: var(--muted-foreground); }
+  .case-cta { margin-top: auto; padding-top: 8px; font-size: 13px; font-weight: 600; display: flex; gap: 8px; }
+
+  /* Contact band */
+  .band { background: var(--ink); color: var(--ink-foreground); padding: 64px 0; }
+  .band-inner { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: center; }
+  .band h2 { font-size: 40px; line-height: 1.08; letter-spacing: -0.035em; font-weight: 800; }
+  .band p { font-size: 16px; line-height: 1.6; color: var(--ink-muted); margin-top: 14px; max-width: 46ch; }
+  .band .links { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--ink-border); }
+  .band .links a { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--ink-border); font-size: 15px; font-weight: 500; }
+  .band .links a .v { margin-right: auto; }
+  .band .links a .k { width: 84px; flex: none; }
+  .band .links a:hover { color: var(--ink-muted); }
+  .band .links .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-muted); }
+  .band .btn-solid { background: var(--ink-foreground); color: var(--ink); }
+  .band .btn-solid:hover { background: color-mix(in srgb, var(--ink-foreground) 88%, transparent); }
+  .band .btn-outline { background: transparent; border-color: var(--ink-border); color: var(--ink-foreground); }
+  .band .btn-outline:hover { background: color-mix(in srgb, var(--ink-foreground) 10%, transparent); }
+
+  .footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 0; font-size: 13px; color: var(--muted-foreground); border-top: 1px solid var(--border); }
+  .footer .social { display: flex; gap: 20px; }
+  .footer a:hover { color: var(--foreground); }
+
+  /* Experience + education */
+  .role { padding: 30px 0; border-top: 1px solid var(--border); display: grid; gap: 18px; }
+  .role-top { display: grid; grid-template-columns: 44px 1fr auto; gap: 20px; align-items: baseline; }
+  .role-top .idx { font-family: var(--font-mono); font-size: 12px; color: var(--muted-foreground); }
+  .role-top h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.025em; }
+  .role-top .sub { font-size: 14px; color: var(--muted-foreground); margin-top: 6px; }
+  .role-top .when { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted-foreground); text-align: right; line-height: 1.7; }
+  .highlights { display: flex; flex-direction: column; gap: 10px; padding-left: 64px; max-width: 104ch; }
+  .highlights li { display: flex; gap: 12px; font-size: 14px; line-height: 1.62; }
+  .highlights li::before { content: "—"; color: var(--muted-foreground); flex: none; }
+  .formacion { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 26px; padding: 22px 0 0 64px; border-top: 1px solid var(--border); }
+  .formacion h4 { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted-foreground); margin-bottom: 8px; }
+  .formacion p { font-size: 14px; font-weight: 500; }
+  .formacion span { display: block; font-size: 13px; color: var(--muted-foreground); margin-top: 3px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<header class="navbar">
+  <a class="brand" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 14 15 20 7"/><line x1="14" y1="7" x2="20" y2="7"/><line x1="20" y1="7" x2="20" y2="13"/></svg>
+    Didier Huerta
+  </a>
+  <nav class="navlinks" aria-label="Navegación principal">
+    <a href="#" aria-current="page">Inicio</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#proceso">Cómo trabajo</a>
+    <a href="#">Blog</a>
+    <a href="#">Contacto</a>
+  </nav>
+</header>
+
+<main>
+  <div class="container">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="mono">Desarrollador Full Stack · Lima, Perú · Disponibilidad inmediata</span>
+        <h1 id="hero-title" style="margin-top:14px;">Aplicaciones web completas,<span> del modelo de datos a la interfaz.</span></h1>
+        <p class="lead">Trabajo con TypeScript, React, Next.js, Node.js, NestJS, Java y Spring Boot sobre PostgreSQL. Construyo de extremo a extremo, con pruebas automatizadas, integración continua y despliegue en producción, y documento las decisiones para que otro equipo pueda continuar.</p>
+        <div class="hero-actions">
+          <a class="btn btn-solid btn-lg" href="#experiencia">Ver experiencia <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline btn-lg" href="#">Escríbeme</a>
+        </div>
+        <div class="facts">
+          <div class="fact"><div class="n">20</div><div class="l">páginas en producción</div></div>
+          <div class="fact"><div class="n">4</div><div class="l">proyectos con ADR y pruebas</div></div>
+          <div class="fact"><div class="n">68</div><div class="l">pruebas automatizadas</div></div>
+        </div>
+      </div>
+
+      <aside class="card-aside" aria-label="Contacto y disponibilidad">
+        <p class="status"><span class="pulse" aria-hidden="true"></span> Disponibilidad inmediata</p>
+        <p class="note">Full Stack, frontend o backend. Presencial, híbrido o remoto desde Lima, Perú.</p>
+        <div class="contact-list">
+          <a href="#"><span class="k">Correo</span> <span class="v">Formulario de contacto</span> <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#"><span class="k">Email</span> <span class="v">didier.huerta.dev@gmail.com</span> <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#"><span class="k">LinkedIn</span> <span class="v">/in/didier-huerta</span> <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#"><span class="k">GitHub</span> <span class="v">/DDR144</span> <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="experiencia" aria-labelledby="experience-title">
+      <div class="section-head">
+        <div>
+          <span class="mono">01 / experiencia</span>
+          <h2 id="experience-title" style="margin-top:10px;">Trabajo profesional y formación</h2>
+          <p>Un rol en producción dentro de un equipo de 12 desarrolladores, y la formación que lo sostiene.</p>
+        </div>
+      </div>
+
+      <article class="role">
+        <div class="role-top">
+          <span class="idx">01</span>
+          <div>
+            <h3>Desarrollador Full Stack</h3>
+            <p class="sub">NHL Decoración Comercial · Lima, Perú</p>
+          </div>
+          <span class="when">dic 2025 — abr 2026</span>
+        </div>
+        <ul class="highlights">
+          <li>Implementé 20 de las 22 páginas de servicio del sitio corporativo de Digimedia con Next.js y React: contenido, metadatos SEO y diseño responsive. El sitio está en producción.</li>
+          <li>Desarrollé en el panel de administración el editor de plantillas de WhatsApp: texto enriquecido, previsualización y cola de campañas, con modo oscuro.</li>
+          <li>Estandaricé el header y footer compartidos traduciendo diseños de Figma a componentes reutilizables, y mejoré rendimiento y accesibilidad de las páginas de servicio.</li>
+          <li>Colaboré en un flujo por ramas con Git y GitHub e integré funcionalidades backend mediante APIs REST.</li>
+        </ul>
+      </article>
+
+      <div class="formacion">
+        <div>
+          <h4>Formación</h4>
+          <p>Instituto IDAT — Desarrollo de Sistemas de Información</p>
+          <span>Egresado · ene 2024 – abr 2026</span>
+        </div>
+        <div>
+          <h4>Idiomas</h4>
+          <p>Instituto Cultural Peruano Británico — Inglés avanzado</p>
+          <span>Lectura de documentación técnica y comunicación profesional</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proyectos" aria-labelledby="projects-title">
+      <div class="section-head">
+        <div>
+          <span class="mono">02 / proyectos</span>
+          <h2 id="projects-title" style="margin-top:10px;">Tres proyectos, el detalle en cada caso</h2>
+          <p>El problema, la solución, lo que quedó funcionando y cómo está armado: cada caso completo vive en su propia página.</p>
+        </div>
+        <a class="btn btn-ghost btn-sm" href="#">Ver los tres casos</a>
+      </div>
+
+      <div class="case-cards">
+        <a class="case-card" href="#">
+          <span class="case-meta">2025 · Full Stack Developer</span>
+          <span class="case-title">DevBlog</span>
+          <span class="case-desc">Plataforma de blog técnico para desarrolladores con panel de administración.</span>
+          <span class="case-cta">Ver el caso <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="case-card" href="#">
+          <span class="case-meta">2024 · Frontend Developer</span>
+          <span class="case-title">Joyas Dido</span>
+          <span class="case-desc">Landing page para joyería artesanal con Astro y cero JavaScript del lado del cliente.</span>
+          <span class="case-cta">Ver el caso <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="case-card" href="#">
+          <span class="case-meta">2026 · Full Stack Developer</span>
+          <span class="case-title">Task Management App</span>
+          <span class="case-desc">App Kanban full-stack con autenticación, drag-and-drop y gestión de tareas.</span>
+          <span class="case-cta">Ver el caso <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="proceso" aria-labelledby="process-title">
+      <div class="section-head">
+        <div>
+          <span class="mono">03 / cómo trabajo</span>
+          <h2 id="process-title" style="margin-top:10px;">De la conversación al código en cuatro pasos</h2>
+          <p>El mismo proceso en los tres proyectos: entender antes de escribir, decidir con criterio y dejar el código mantenible.</p>
+        </div>
+      </div>
+
+      <div class="process">
+        <div class="step">
+          <div class="num">01</div>
+          <h3>Entender el problema</h3>
+          <p>Antes de la primera línea pregunto qué tiene que lograr el sitio y quién lo va a usar. En Joyas Dido eso significó un flujo de encargo por WhatsApp, no un carrito.</p>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <h3>Elegir la arquitectura</h3>
+          <p>Estático cuando alcanza, full-stack cuando hace falta. Astro sin JavaScript para la joyería; Next.js con Server Actions para el Kanban.</p>
+        </div>
+        <div class="step">
+          <div class="num">03</div>
+          <h3>Construir por capas</h3>
+          <p>Datos, componentes y páginas separados. TypeScript en los bordes, validación en el servidor y componentes accesibles desde el inicio.</p>
+        </div>
+        <div class="step">
+          <div class="num">04</div>
+          <h3>Medir y ajustar</h3>
+          <p>Core Web Vitals, contraste y navegación por teclado antes de entregar. Si una decisión no se sostiene en métricas, se cambia.</p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div>
+          <span class="mono">04 / criterios</span>
+          <h2 style="font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-top:10px;">Lo que puedes esperar de mi código</h2>
+          <p style="font-size:15px;color:var(--muted-foreground);margin-top:10px;">Reglas que aplico en todos los proyectos, no solo en los que muestro.</p>
+        </div>
+        <ul class="criteria">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span><b>Accesible por defecto:</b> contraste AA, foco visible y navegación por teclado.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span><b>Rápido donde se nota:</b> renderizado estático cuando el contenido no cambia por usuario.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span><b>Lógica en el servidor:</b> validación y permisos fuera del cliente, siempre.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span><b>Fácil de retomar:</b> nombres claros, componentes pequeños y decisiones documentadas.</span></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <section class="band" aria-labelledby="cta-title">
+    <div class="container band-inner">
+      <div>
+        <h2 id="cta-title">¿Buscas un full stack que también cuide el detalle?</h2>
+        <p>Disponibilidad inmediata para presencial, híbrido o remoto desde Lima, Perú. Cuéntame el puesto o el proyecto y te respondo con cómo lo abordaría.</p>
+        <div style="display:flex;gap:10px;margin-top:26px;">
+          <a class="btn btn-solid btn-lg" href="#">Escríbeme <span aria-hidden="true">→</span></a>
+          <a class="btn btn-outline btn-lg" href="#proyectos">Ver proyectos</a>
+        </div>
+      </div>
+      <div class="links">
+        <a href="#"><span class="k">Correo</span> <span class="v">Formulario de contacto</span> <span aria-hidden="true">→</span></a>
+        <a href="#"><span class="k">Email</span> <span class="v">didier.huerta.dev@gmail.com</span> <span aria-hidden="true">→</span></a>
+        <a href="#"><span class="k">LinkedIn</span> <span class="v">/in/didier-huerta</span> <span aria-hidden="true">→</span></a>
+        <a href="#"><span class="k">GitHub</span> <span class="v">/DDR144</span> <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer container">
+    <p>Construido con Next.js, Tailwind y Shadcn/UI. © 2026 Didier Huerta.</p>
+    <div class="social"><a href="#">GitHub</a><a href="#">LinkedIn</a><a href="#">Correo</a></div>
+  </footer>
+</main>
+</body>
+</html>

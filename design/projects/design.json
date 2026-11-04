@@ -1,0 +1,34 @@
+{
+  "title": "Página de proyectos",
+  "brief": "Página de proyectos para un portafolio cuyo objetivo es generar conversaciones de contratación.",
+  "artboards": [
+    {
+      "file": "01-case-index.html",
+      "title": "Índice de casos",
+      "tradeoff": "Gana escaneabilidad comparativa y deja ver todo el stack de un vistazo; pierde impacto visual y obliga al lector a hacer clic para entender el contexto de cada proyecto.",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "02-gallery.html",
+      "title": "Galería visual",
+      "tradeoff": "Gana atractivo visual y escala bien con más proyectos; cuesta más comparar problemas y resultados directamente porque el texto pasa a segundo plano.",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "03-dossier.html",
+      "title": "Dossier",
+      "tradeoff": "Gana profundidad narrativa y demuestra cómo se piensa un proyecto completo; exige más atención del reclutador y deja los otros dos proyectos en un índice compacto.",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "04-gallery-dossier.html",
+      "title": "Galería con detalle de caso",
+      "tradeoff": "Combina la entrada visual de la galería con la profundidad del dossier: la tarjeta abre un caso completo (problema, qué construí, qué quedó funcionando, capturas y cómo está armado) en una vista propia. Tres espacios de captura por caso (una principal 16:10 y dos de detalle 4:3). Gana profundidad sin perder el vistazo rápido; cuesta un clic más por proyecto y depende de capturas reales.",
+      "width": 1440,
+      "height": 1000
+    }
+  ]
+}
